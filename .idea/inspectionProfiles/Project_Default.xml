@@ -1,0 +1,41 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="W292" />
+          <option value="E501" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N802" />
+          <option value="N806" />
+          <option value="N803" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="PyQt5.QtWidgets.clicked.connect" />
+          <option value="PyQt5.QtWidgets.currentTextChanged.connect" />
+          <option value="PyQt5.QtCore.QObject.project_names" />
+          <option value="PyQt5.QtWidgets.itemDoubleClicked.connect" />
+          <option value="" />
+          <option value="PyQt5.QtSql.QSqlTableModel.OnManualSubmit" />
+          <option value="PyQt6.QtSql.QSqlQuery.exec_" />
+          <option value="daily.models.STATUS_CHOICES" />
+          <option value="myshop.models.Product.id" />
+          <option value="util.Tools.*" />
+          <option value="orders.models.Order.Meta.id" />
+          <option value="orders.models.Order.Meta.items" />
+          <option value="django.db.models.fields.DecimalField.__mul__" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

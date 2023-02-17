@@ -1,0 +1,5 @@
+# Windows App Engine generated folder
+*.pyc
+*.mo
+
+venv/
