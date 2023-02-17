@@ -1,16 +1,43 @@
-# This is a sample Python script.
+import wx
+from sqlalchemy.sql.functions import current_user
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from Accounts.dialogs import LoginDialog
+from MyWxLib.menus import MainMenu
+from mainWindow import MainWindow
 
 
-# Press the green button in the gutter to run the script.
+class BlankWindow(wx.MDIParentFrame):
+    def __init__(self, *args, **kwargs):
+        super(BlankWindow, self).__init__(*args, **kwargs)
+        self.user = None
+        self.initUI()
+        self.initWindows()
+        self.SetTitle(kwargs['title'])
+        self.SetBackgroundColour('gray')
+        self.ShowFullScreen(True)
+
+    def initUI(self):
+        # add menu
+        nMenu = MainMenu(self)
+        self.SetMenuBar(nMenu)
+
+    def initWindows(self):
+        mWindow = MainWindow(self)
+        if LoginDialog(self).ShowModal():
+            if self.user:
+                wx.MessageBox("Hi, {}".format(self.user))
+                mWindow.Show()
+        else:
+            self.Close()
+
+
+
+def main():
+    app = wx.App()
+    window = BlankWindow(None, title="Netway Computer Management System")
+    window.Show()
+    app.MainLoop()
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()

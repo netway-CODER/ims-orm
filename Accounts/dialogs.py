@@ -1,13 +1,15 @@
+import wx
+
 from Accounts import Session
 from Accounts.model import User
-import wx
-import settings
 
 
 # login dialog
+
+
 class LoginDialog(wx.Dialog):
-    def __init__(self, *parent):
-        super(LoginDialog, self).__init__(*parent)
+    def __init__(self, parent):
+        super(LoginDialog, self).__init__(parent)
         self.parent = parent
         self.initUI()
         self.SetTitle('Sign-In')
@@ -55,21 +57,24 @@ class LoginDialog(wx.Dialog):
         login_button.Bind(wx.EVT_BUTTON, self.onLogin)
         cancel_button.Bind(wx.EVT_BUTTON, self.onCancel)
 
-    def onLogin(self, evt):
-        mUser = self.user.GetValue()
-        if mUser:
+    def onLogin(self, e):
+        current_user_name = self.user.GetValue()
+        if current_user_name:
             with Session() as session:
-                lUser = session.query(User).filter(User.name == mUser).one()
+                lUser = session.query(User).filter(User.name == current_user_name).one()
+                print(lUser)
         current_password = self.pwd.GetValue()
         if current_password == lUser.password:
-            settings.CURRENT_USER = lUser.name
+            self.parent.user = current_user_name
             self.EndModal(True)
         else:
             wx.MessageBox("User is not existed or wrong password!", "Login False")
             self.pwd.SetFocus()
+        e.Skip()
 
     def onCancel(self, e):
         self.EndModal(False)
+        e.Skip()
 
 
 # user entry form dialog:
@@ -99,6 +104,7 @@ class UserEntryFormDialog(wx.Dialog):
                 self.EndModal(True)
             else:
                 self.EndModal(False)
+        e.Skip()
 
 
 # User entry form panel:
@@ -156,7 +162,6 @@ class UserEntryForm(wx.Panel):
             return nUser
         else:
             return None
-
 
     def onComfirm(self):
         new_password = self.password.GetValue()
